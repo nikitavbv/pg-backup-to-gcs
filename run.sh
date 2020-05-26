@@ -1,0 +1,1 @@
+docker run --network database_network -e POSTGRES_PASSWORD=postgres_password -e POSTGRES_USER=postgres -e POSTGRES_HOST=database -e POSTGRES_DATABASE=postgres -e POSTGRES_PORT=5432 pg_backup
