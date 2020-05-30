@@ -7,3 +7,7 @@ echo $POSTGRES_HOST:${POSTGRES_PORT:-5432}:$POSTGRES_DATABASE:$POSTGRES_USER:$PO
 pg_dump -U $POSTGRES_USER -F t $POSTGRES_DATABASE -h $POSTGRES_HOST -p ${POSTGRES_PORT:-5432} > backup.sql
 
 zstd -${COMPRESSION_LEVEL:-19} backup.sql
+
+echo $GOOGLE_CLOUD_KEY > /tmp/google_cloud_key.json
+gcloud auth activate-service-account --key-file /tmp/google_cloud_key.json
+gsutil cp backup.sql gs://$BACKUP_GCS_BUCKET/${BACKUP_PREFIX:-backup}-$(date +%FT%H-%M).sql
