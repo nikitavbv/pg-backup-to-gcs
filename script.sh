@@ -1,3 +1,5 @@
+set -e
+
 source /google-cloud-sdk/path.bash.inc
 
 touch ~/.pgpass
