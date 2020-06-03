@@ -1,6 +1,12 @@
 # pg-backup-to-gcs
 Backup your postgres database to Google Cloud Storage.
 
+## Usage
+
+```
+docker run --network database_network -e POSTGRES_PASSWORD=database_password -e POSTGRES_USER=user -e POSTGRES_HOST=database_host -e POSTGRES_DATABASE=database_name -e GOOGLE_CLOUD_KEY=$(cat service_account.json) -e BACKUP_GCS_BUCKET=bucket_name pg_backup
+```
+
 ## Environment variables
 
 | variable          | optional?             | description                                                                                                          |
