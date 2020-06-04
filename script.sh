@@ -1,5 +1,7 @@
 set -e
 
+echo 'backup started at ' $(date +"%Y:%m:%d %H:%M:%S")
+
 source /google-cloud-sdk/path.bash.inc
 
 touch ~/.pgpass
@@ -12,4 +14,9 @@ zstd -${COMPRESSION_LEVEL:-19} backup.sql
 
 echo $GOOGLE_CLOUD_KEY > /tmp/google_cloud_key.json
 gcloud auth activate-service-account --key-file /tmp/google_cloud_key.json
+
+echo 'uploading to gcs started at ' $(date +"%Y:%m:%d %H:%M:%S")
+
 gsutil cp backup.sql gs://$BACKUP_GCS_BUCKET/${BACKUP_PREFIX:-backup}-$(date +%FT%H-%M).sql
+
+echo 'finished at ' $(date +"%Y:%m:%d %H:%M:%S")
