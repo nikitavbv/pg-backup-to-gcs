@@ -1,0 +1,25 @@
+name: Build docker image
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: alpine:latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Publish docker image to Github Packages
+      uses: HurricanKai/Publish-Docker-Github-Action@master
+      with:
+        name: docker.pkg.github.com/nikitavbv/pg-backup-to-gcs/pg-backup
+        registry: docker.pkg.github.com 
+        username: ${{ secrets.GITHUB_TOKEN }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+    - name: Publish docker image to Docker Hub
+      uses: HurricanKai/Publish-Docker-Github-Action@master
+      with:
+        name: nikitavbv/monitoring_agent
+        registry: docker.io
+        username: nikitavbv
+        password: ${{ secrets.docker_hub_token }}
