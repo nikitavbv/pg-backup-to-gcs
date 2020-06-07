@@ -19,7 +19,7 @@ jobs:
     - name: Publish docker image to Docker Hub
       uses: HurricanKai/Publish-Docker-Github-Action@master
       with:
-        name: nikitavbv/monitoring_agent
+        name: nikitavbv/pg-backup-to-gcs
         registry: docker.io
         username: nikitavbv
         password: ${{ secrets.docker_hub_token }}
