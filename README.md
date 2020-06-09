@@ -25,3 +25,7 @@ docker run --network database_network -e POSTGRES_PASSWORD=database_password -e 
 | GOOGLE_CLOUD_KEY  | no                    | service account key with access to gcs bucket                                                                        |
 | BACKUP_GCS_BUCKET | no                    | gcs bucket to upload backups to                                                                                      |
 | BACKUP_PREFIX     | yes, empty by default | prefix to path or name of backup file                                                                                |
+
+[hub]: https://hub.docker.com/r/nikitavbv/pg-backup-to-gcs/
+[build]: https://github.com/nikitavbv/pg-backup-to-gcs/actions
+[license]: https://tldrlegal.com/license/mit-license
