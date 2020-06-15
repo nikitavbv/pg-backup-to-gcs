@@ -10,12 +10,10 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: Publish docker image to Docker Hub
-      uses: HurricanKai/Publish-Docker-Github-Action@master
-      env:
-        GITHUB_TAG: 0.1.0
+      uses: elgohr/Publish-Docker-Github-Action@master
       with:
         name: nikitavbv/pg-backup-to-gcs
         registry: docker.io
         username: nikitavbv
         password: ${{ secrets.docker_hub_token }}
-        tagging: true
+        tags: "latest,0.1.0"
