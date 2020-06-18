@@ -17,6 +17,6 @@ gcloud auth activate-service-account --key-file /tmp/google_cloud_key.json
 
 echo 'uploading to gcs started at ' $(date +"%Y:%m:%d %H:%M:%S")
 
-gsutil cp backup.sql gs://$BACKUP_GCS_BUCKET/${BACKUP_PREFIX:-backup}-$(date +%FT%H-%M).sql
+gsutil cp backup.sql.zst gs://$BACKUP_GCS_BUCKET/${BACKUP_PREFIX:-backup}-$(date +%FT%H-%M).sql.zst
 
 echo 'finished at ' $(date +"%Y:%m:%d %H:%M:%S")
