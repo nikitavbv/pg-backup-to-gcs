@@ -12,6 +12,52 @@ Backup your postgres database to Google Cloud Storage.
 docker run --network database_network -e POSTGRES_PASSWORD=database_password -e POSTGRES_USER=user -e POSTGRES_HOST=database_host -e POSTGRES_DATABASE=database_name -e GOOGLE_CLOUD_KEY=$(cat service_account.json) -e BACKUP_GCS_BUCKET=bucket_name pg_backup
 ```
 
+Kubernetes cron job:
+```
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: postgres-backup
+spec:
+  schedule: "0 6 * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: postgres-backup
+            image: nikitavbv/pg-backup-to-gcs:0.1.1
+            env:
+            - name: POSTGRES_USER
+              value: pg_user
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-password
+                  key: postgres-password
+            - name: POSTGRES_DATABASE
+              value: pg_db
+            - name: POSTGRES_HOST
+              value: postgres
+            - name: POSTGRES_PORT
+              value: "5432"
+            - name: BACKUP_GCS_BUCKET
+              value: your_backup_bucket_on_gcs
+            - name: GOOGLE_CLOUD_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: pg-backup-to-gcs-key
+                  key: pg-backup-to-gcs-key
+            resources:
+              limits:
+                memory: 256M
+                cpu: "250m"
+              requests:
+                memory: 100M
+                cpu: "10m"
+          restartPolicy: OnFailure
+```
+
 ## Environment variables
 
 | variable          | optional?             | description                                                                                                          |
