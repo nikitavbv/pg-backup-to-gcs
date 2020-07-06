@@ -1,7 +1,7 @@
 # pg-backup-to-gcs
 
 [![Docker image build](https://img.shields.io/github/workflow/status/nikitavbv/pg-backup-to-gcs/Build%20docker%20image)][build]
-[![Docker Pulls](https://img.shields.io/docker/pulls/prom/prometheus.svg?maxAge=604800)][hub]
+[![Docker Pulls](https://img.shields.io/docker/pulls/nikitavbv/pg-backup-to-gcs.svg?maxAge=604800)][hub]
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)][license]
 
 Backup your postgres database to Google Cloud Storage.
